@@ -27,21 +27,17 @@ void check(element *p,int16_t vvod) {
         printf("Such element exists\n");
     else{
         int k=0;
-        element *d = ( element* ) malloc(sizeof(element));
-        d=p->p1;
-        while ((k==0)&&((d->p1)!=0)) {
-            if ((d->A) == vvod) {
+        while ((k==0)&&(((p->p1)->p1)!=0)) { // заменила d на (p->p1)
+            if (((p->p1)->A) == vvod) {
                 k = k + 1;
             }
             else {
-                k=0;
-                d = d->p1;
+                (p->p1) = (p->p1)->p1;
             }
         }
         if (k==0)
             printf("Such element does not exist\n");
         else
             printf("Such element exists\n");
-        free(d);
     }
 }
