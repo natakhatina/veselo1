@@ -1,30 +1,42 @@
 #include <iostream>
 #include "head1.h"
-
+int raz;
 int main() {
-    int n=rand()%25+10;
-    printf("Элементов в коллекции %d штук \n", n);
+    raz=0;
+    //int n=rand()%25+10;
+    //printf("Элементов в коллекции %d штук \n", n);
     element *p = ( element* ) malloc(sizeof(element));
-    p->A=static_cast<int16_t >(rand());
-    p->p1=0;
-    p->p2=p+1;
-    printf("%hd\n",p->A);
-    for (int i = 1; i < n-2; i++){
-       p=collection(p);
-        printf("%hd\n",p->A);
+    p=Init(p);
+    printf("%lf\n",p->A);
+
+    double k=static_cast<double >(rand()%114)+static_cast<double >(rand()%565)/1000;
+    printf("%lf\n",k);
+    element *new_element=( element* ) malloc(sizeof(element));;
+    new_element=insert(p,k);
+
+    k = static_cast<double >(rand() % 114) + static_cast<double >(rand() % 565) / 1000;
+    printf("%lf\n", k);
+        // new_element=insert2(p,p->next,k);
+    new_element = insert2(new_element, new_element->next, k);
+    new_element=new_element->next;
+    schet(new_element);
+
+    element* d = new_element;
+    while(d!=0)
+    {
+        printf("%lf\n",d->A);
+        d=d->previous;
     }
-    p = ( element* ) malloc(sizeof(element));
-    p->A=static_cast<int16_t >(rand());
-    p->p1=p-1;
-    p->p2=0;
-    printf("%hd\n",p->A);
-    p=add_back(p);
-    printf("%hd\n",p->A);
-    int16_t vvod;
-    printf("введите число, которое нужно проверить:");
-    scanf ("%hd\n", &vvod);
-    check(p,vvod);
 
 
+    new_element = insert2(new_element->previous, new_element, 76);
+    new_element=new_element->next;
+    d = new_element;
+    while(d!=0)
+    {
+        printf("%lf\n",d->A);
+        d=d->previous;
+    }
+    printf("Кол-во элементов в коллекции: %d\n", raz);
         return 0;
 }

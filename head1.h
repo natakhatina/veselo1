@@ -7,12 +7,14 @@
 #include <cstdint>
 
 struct element {
-    element *p1;
-    element *p2;
-    int16_t A;
+    element *previous;
+    element *next;
+    double A;
 };
-element *collection (element *p);
-element *add_back(element *p);
-void check(element *p,int16_t vvod);
+
+element *Init(element *p);
+element *insert(element *p,double k);
+element *insert2(element *p,element *d,double k);
+void schet(element *new_element);
 
 #endif //VESELO_HEAD1_H

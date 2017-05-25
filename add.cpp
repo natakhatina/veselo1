@@ -1,43 +1,98 @@
 #include <iostream>
 #include "head1.h"
-/*void add(element *p){
-    p->A=static_cast<int16_t >(rand());
-    p->p1=p-1;
-    p->p2=0;
-    p--;
-    p->p2=p+1;
+extern int raz;
+element *Init(element *p){
+    raz++;
+    element *P=(element*)malloc(sizeof(element));
+    P->A=static_cast<double>(rand()%114)+static_cast<double >(rand()%565)/1000;
+    //printf("%lf\n",P->A);
+    P->previous=0;
+    P->next=0;
+    return P;
+}
+
+
+element *insert(element *p,double k){
+raz++;
+    element *new_element = ( element* ) malloc(sizeof(element));
+    new_element->A=k;
+    new_element->previous=0;
+    new_element->next=0;
+    if(k>(p->A)){
+       p->next=new_element;
+       new_element->previous=p;
+        return p;
+    }
+    else {
+        p->previous=new_element;
+        new_element->next=p;
+        return new_element;
+    }
+
+}
+
+/*element *insert2(element *p,element *d,double k){
+    raz++;
+    element *new_element = ( element* ) malloc(sizeof(element));
+    new_element->A=k;
+    new_element->previous=0;
+    new_element->next=0;
+    if (k<(p->A)){
+        new_element->next=p;
+        p->previous=new_element;
+        return p;
+    }
+    if (k>(d->A)){
+        new_element->previous=d;
+        d->next=new_element;
+        return d;
+    }
+    if ((k>(p->A))&&(k<(d->A))){
+        p->next=new_element;
+        d->previous=new_element;
+        new_element->previous=p;
+        new_element->next=d;
+        return new_element;
+    }
+    else {
+        d->next=new_element;
+        p->previous=new_element;
+        new_element->previous=d;
+        new_element->next=p;
+        return new_element;
+    }
 }*/
-element *collection (element *p){
-    element *P=(element*)malloc(sizeof(element));
-    P->A=static_cast<int16_t >(rand());
-    P->p1=p-1;
-    P->p2=p+1;
-    return P;
+void schet(element *new_element){
+    int i=0;
+    do {
+        i++;
+        new_element = new_element->previous;
+    }while (new_element!=0);
+    printf ("кол-во:%d\n",i);
 }
-element *add_back(element *p){
-    element *P=(element*)malloc(sizeof(element));
-    p->p2=P;
-    P->A=static_cast<int16_t >(rand());
-    P->p1=p;
-    P->p2=p+1;
-    return P;
-}
-void check(element *p,int16_t vvod) {
-    if ((p->A)==vvod)
-        printf("Such element exists\n");
-    else{
-        int k=0;
-        while ((k==0)&&(((p->p1)->p1)!=0)) { // заменила d на (p->p1)
-            if (((p->p1)->A) == vvod) {
-                k = k + 1;
-            }
-            else {
-                (p->p1) = (p->p1)->p1;
-            }
+
+
+element *insert2(element *p,element *d,double k) {
+    raz++;
+    element *new_element = (element *) malloc(sizeof(element));
+    new_element->A = k;
+    new_element->previous = 0;
+    new_element->next = 0;
+    if (k>(d->A)){
+        new_element->previous=d;
+        d->next=new_element;
+        return d;
+    }
+    else {
+        int i=0;
+        while (k<(p->A))
+        {   new_element->next=p;
+            new_element->previous=p->previous;
+            p->previous->next=new_element;
+            p->previous=new_element;
+            i++;
+            p=p->previous;
         }
-        if (k==0)
-            printf("Such element does not exist\n");
-        else
-            printf("Such element exists\n");
+        return d->previous;
     }
 }
